@@ -9,5 +9,7 @@ import java.util.List;
 @Mapper
 public interface EmployeeMapper {
     List<Employee> selectAll();
+    List<Employee> selectByPage(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
    void insert(@Param("employee") Employee employee);
+   
 }

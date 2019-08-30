@@ -8,7 +8,6 @@ public class ParkingLot {
     private int capacity;
     private Map<ParkingTicket, Car> cars = new HashMap<>();
 
-
     public ParkingLot() {
     }
     
@@ -33,7 +32,7 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public int getAvailablePositionCount() {
+    private int getAvailablePositionCount() {
         return capacity - cars.size();
     }
 

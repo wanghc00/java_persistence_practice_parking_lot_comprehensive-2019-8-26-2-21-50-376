@@ -7,4 +7,7 @@
     <insert id="insert">
     	insert into employee (id,name,age) values (#{employee.id}, #{employee.name}, #{employee.age});
     </insert>
+    <select id="selectByPage" resultType="tws.entity.Employee">
+    	SELECT * FROM employee OFFSET #{startIndex} ROWS FETCH NEXT #{pageSize} ROWS ONLY;;
+    </select>
 </mapper>
