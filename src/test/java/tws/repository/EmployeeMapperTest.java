@@ -43,4 +43,25 @@ public class EmployeeMapperTest {
         // then
         assertEquals(1, employeeList.size());
     }
+    
+    @Test
+    public void should_Fetch_EmployeeInfo_when_selectAll_given_1_zhangsan_21() {
+        //given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan',21);");
+        
+        //when
+        List<Employee> employees = employeeMapper.selectAll();
+        
+        //then
+        assertEquals(1, employees.get(0).getId());
+        assertEquals("zhangsan", employees.get(0).getName());
+    }
+    
+    @Test
+    public void should_fetch_employeeInfo_when_selectByPage_given_employees() {
+        //given
+        jdbcTemplate.execute("insert ");
+    }
+    
+    
 }
