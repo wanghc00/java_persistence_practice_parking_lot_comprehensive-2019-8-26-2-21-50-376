@@ -96,4 +96,16 @@ public class EmployeeMapperTest {
         assertEquals(2, parkingLots.size());
     } 
     
+    @Test
+    public void should_fetch_employeeInfo_when_insert_given_employee() {
+        //given
+        Employee employee = new Employee(1,"zhangsan1", 18);
+        
+        //when
+        employeeMapper.insert(employee);
+        
+        //then
+        assertEquals(1, employeeMapper.selectAll().size());
+    }
+    
 }
