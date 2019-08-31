@@ -14,7 +14,7 @@
     	select * from parkingLot where employeeId = #{id};
     </select>
     <update id="updateEmployeeInfo">
-    	update employee set id = #{employee.id}, name = #{employee.name},age = #{employee.age};
+    	update employee set name = #{employee.name},age = #{employee.age} where id = #{employee.id};
     </update>
     <delete id="deleteEmployee">
     	delete from employee where employee.id = #{id};

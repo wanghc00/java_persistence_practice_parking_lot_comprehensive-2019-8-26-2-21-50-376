@@ -7,4 +7,10 @@
     <insert id="insertParkingLot">
     	insert into parkingLot (id,capacity) values (#{parkingLot.id}, #{parkingLot.capacity});
     </insert>
+    <update id="updateParkingLotInfo">
+    	update parkingLot set capacity = #{parkingLot.capacity}, employeeId = #{parkingLot.capacity} where id = #{parkingLot.id};
+    </update>
+    <delete id="deleteParkingLot">
+    	delete from parkingLot where parkingLot.id = #{id};
+    </delete>
 </mapper>

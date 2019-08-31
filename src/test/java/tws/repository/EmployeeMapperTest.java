@@ -56,7 +56,7 @@ public class EmployeeMapperTest {
     }
     
     @Test
-    public void should_Fetch_EmployeeInfo_when_selectAll_given_1_zhangsan_21() {
+    public void should_fetch_EmployeeInfo_when_selectAll_given_1_zhangsan_21() {
         //given
         jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan',21);");
         
