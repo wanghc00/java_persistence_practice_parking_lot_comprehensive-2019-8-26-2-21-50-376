@@ -67,7 +67,19 @@ public class ParkingLotMapperTest {
         assertEquals(0, parkingLotMapper.selectAllParkingLots().size());
     }
     
-   
+    @Test
+    public void should_fetch_parkinglotInfo_when_updateParkingLotInfo_given_id() {
+        //given
+        jdbcTemplate.execute("insert into parkingLot (id, capacity) values ('1', 10);");
+        ParkingLot parkingLot = new ParkingLot("1", 20);
+        
+        //when
+        parkingLotMapper.updateParkingLotInfo(parkingLot);
+        
+        //then
+        assertEquals(20, parkingLotMapper.selectAllParkingLots().get(0).getCapacity());
+    }
+    
     
     
     
