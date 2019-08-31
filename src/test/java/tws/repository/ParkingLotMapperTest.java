@@ -2,6 +2,8 @@ package tws.repository;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.junit.After;
@@ -80,13 +82,17 @@ public class ParkingLotMapperTest {
         assertEquals(20, parkingLotMapper.selectAllParkingLots().get(0).getCapacity());
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
+    @Test
+    public void should_fetch_parkinglotInfo_when_selectAllParkingLots_given_parkingLots() {
+        //given
+        jdbcTemplate.execute("insert into parkingLot (id, capacity) values ('1', 10);");
+        jdbcTemplate.execute("insert into parkingLot (id, capacity) values ('2', 20);");
+        jdbcTemplate.execute("insert into parkingLot (id, capacity) values ('3', 30);");
+        
+        //when
+        List<ParkingLot> parkingLots = parkingLotMapper.selectAllParkingLots();
+        
+        //then
+        assertEquals(30, parkingLots.get(2).getCapacity());
+    }
 }
