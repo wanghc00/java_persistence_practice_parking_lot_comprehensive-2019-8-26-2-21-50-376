@@ -124,5 +124,17 @@ public class EmployeeMapperTest {
         assertEquals("zhangsan", employeeMapper.selectAll().get(0).getName());
     }
     
+    @Test
+    public void should_fetch_employeeInfo_when_deleteEmployee_given_employee() {
+        //given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan1',18);");
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(2,'zhangsan1',18);");
+        
+        //when
+        employeeMapper.deleteEmployee(1);
+        
+        //then
+        assertEquals(1, employeeMapper.selectAll().size());
+    }
     
 }
