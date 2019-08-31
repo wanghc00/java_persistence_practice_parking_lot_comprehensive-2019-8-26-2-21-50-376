@@ -10,8 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-import tws.controller.EmployeeController;
 import tws.entity.Employee;
+import tws.entity.ParkingLot;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -35,6 +35,7 @@ public class EmployeeMapperTest {
     @Before
     public void deleteEmployeeTable() {
         jdbcTemplate.execute("delete employee;");
+        jdbcTemplate.execute("delete parkingLot;");
     }
     
     @After
@@ -78,5 +79,21 @@ public class EmployeeMapperTest {
         //then
         assertEquals("zhangsan3", employees.get(0).getName());
     }    
+    
+    @Test
+    public void should_fetch_parkinglotInfo_when_selectParkingLotsById_given_employees_and_parkinglots() {
+        //given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan1',18);");
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(2,'zhangsan2',18);");
+        jdbcTemplate.execute("insert into parkingLot (id, capacity, employeeId) values ('1', 10, 1);");
+        jdbcTemplate.execute("insert into parkingLot (id, capacity, employeeId) values ('2', 20, 1);");
+        jdbcTemplate.execute("insert into parkingLot (id, capacity, employeeId) values ('3', 30, 2);");
+        
+        //when
+        List<ParkingLot> parkingLots = employeeMapper.selectParkingLotsById(1);
+        
+        //then
+        assertEquals(2, parkingLots.size());
+    } 
     
 }
