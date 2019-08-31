@@ -6,6 +6,8 @@ import java.util.Map;
 public class ParkingLot {
     private String id;
     private int capacity;
+    private int availablePositionCount;
+    private int employeeId;
     private Map<ParkingTicket, Car> cars = new HashMap<>();
 
     public ParkingLot() {
@@ -32,7 +34,7 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    private int getAvailablePositionCount() {
+    public int getAvailablePositionCount() {
         return capacity - cars.size();
     }
 
@@ -49,5 +51,13 @@ public class ParkingLot {
             return car;
         }
         return null;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 }

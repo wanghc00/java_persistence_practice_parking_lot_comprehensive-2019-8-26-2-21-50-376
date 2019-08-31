@@ -8,6 +8,15 @@
     	insert into employee (id,name,age) values (#{employee.id}, #{employee.name}, #{employee.age});
     </insert>
     <select id="selectByPage" resultType="tws.entity.Employee">
-    	SELECT * FROM employee OFFSET #{startIndex} ROWS FETCH NEXT #{pageSize} ROWS ONLY;;
+    	select * from employee offset #{startIndex} rows fetch next #{pageSize} rows only;
     </select>
+    <select id="selectParkingLotsById" resultType="tws.entity.ParkingLot">
+    	select * from parkingLot where employeeId = #{id};
+    </select>
+    <update id="updateEmployeeInfo">
+    	update employee set id = #{employee.id}, name = #{employee.name},age = #{employee.age};
+    </update>
+    <delete id="deleteEmployee">
+    	delete from employee where employee.id = #{id};
+    </delete>
 </mapper>

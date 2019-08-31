@@ -1,6 +1,7 @@
 package tws.repository;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
+
+import tws.controller.EmployeeController;
 import tws.entity.Employee;
 
 import javax.sql.DataSource;
@@ -28,7 +31,12 @@ public class EmployeeMapperTest {
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
+    
+    @Before
+    public void deleteEmployeeTable() {
+        jdbcTemplate.execute("delete employee;");
+    }
+    
     @After
     public void tearDown() throws Exception {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "employee");
@@ -60,8 +68,15 @@ public class EmployeeMapperTest {
     @Test
     public void should_fetch_employeeInfo_when_selectByPage_given_employees() {
         //given
-        jdbcTemplate.execute("insert ");
-    }
-    
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan1',18);");
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(2,'zhangsan2',18);");
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(3,'zhangsan3',18);");
+        
+        //when
+        List<Employee> employees = employeeMapper.selectByPage(2, 2);
+        
+        //then
+        assertEquals("zhangsan3", employees.get(0).getName());
+    }    
     
 }

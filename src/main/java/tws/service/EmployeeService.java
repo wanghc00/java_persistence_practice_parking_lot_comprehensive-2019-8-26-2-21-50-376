@@ -38,9 +38,8 @@ public class EmployeeService {
     
     
     public List<Employee> getEmployeesByPage(int pageSize, int page) {
-        List<Employee> allEmployees = employeeMapper.selectAll();
         List<Employee> result = new ArrayList<Employee>();
-        int startIndex = page*(pageSize-1);
+        int startIndex = pageSize*(page-1);
         result = employeeMapper.selectByPage(startIndex, pageSize);
         return result;
     }
