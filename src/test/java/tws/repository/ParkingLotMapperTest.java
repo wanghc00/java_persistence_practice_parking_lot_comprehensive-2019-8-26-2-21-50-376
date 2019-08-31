@@ -55,8 +55,19 @@ public class ParkingLotMapperTest {
         assertEquals(1, parkingLotMapper.selectAllParkingLots().size());
     }
     
-
+    @Test
+    public void should_fetch_null_when_deleteParkingLot_given_id() {
+        //given
+        jdbcTemplate.execute("insert into parkingLot (id, capacity, employeeId) values ('1', 10, 1);");
+        
+        //when
+        parkingLotMapper.deleteParkingLot("1");
+        
+        //then
+        assertEquals(0, parkingLotMapper.selectAllParkingLots().size());
+    }
     
+   
     
     
     
