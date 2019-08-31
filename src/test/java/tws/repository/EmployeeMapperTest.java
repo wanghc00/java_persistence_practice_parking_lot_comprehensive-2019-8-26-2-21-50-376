@@ -41,6 +41,8 @@ public class EmployeeMapperTest {
     @After
     public void tearDown() throws Exception {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "employee");
+        jdbcTemplate.execute("delete employee;");
+        jdbcTemplate.execute("delete parkingLot;");
     }
 
     @Test
@@ -108,6 +110,19 @@ public class EmployeeMapperTest {
         assertEquals(1, employeeMapper.selectAll().size());
     }
     
+    
+    @Test
+    public void should_fetch_employeeInfo_when_updateEmployeeInfo_given_employee() {
+        //given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan1',18);");
+        Employee employee = new Employee(1,"zhangsan", 18);
+        
+        //when
+        employeeMapper.updateEmployeeInfo(employee);
+        
+        //then
+        assertEquals("zhangsan", employeeMapper.selectAll().get(0).getName());
+    }
     
     
 }
