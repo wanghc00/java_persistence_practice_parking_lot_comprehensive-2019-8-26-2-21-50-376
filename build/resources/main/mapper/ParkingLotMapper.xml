@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tws.repository.ParkingLotMapper">
+    <select id="selectAllParkingLots" resultType="tws.entity.ParkingLot">
+        select * from `parkingLot`;
+    </select>
+    <insert id="insertParkingLot">
+    	insert into parkingLot (id,capacity,availablePositionCount,employeeId) values (#{parkingLot.id}, #{parkingLot.capacity},#{parkingLot.availablePositionCount}, #{parkingLot.employeeId});
+    </insert>
+    <update id="updateParkingLotInfo">
+    	update parkingLot set capacity = #{parkingLot.capacity}, employeeId = #{parkingLot.capacity} where id = #{parkingLot.id};
+    </update>
+    <delete id="deleteParkingLot">
+    	delete from parkingLot where parkingLot.id = #{id};
+    </delete>
+</mapper>

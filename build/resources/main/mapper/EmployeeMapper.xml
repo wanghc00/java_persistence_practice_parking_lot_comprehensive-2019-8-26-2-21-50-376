@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tws.repository.EmployeeMapper">
+    <select id="selectAll" resultType="tws.entity.Employee">
+        select * from `employee`;
+    </select>
+    <insert id="insert">
+    	insert into employee (id,name,age) values (#{employee.id}, #{employee.name}, #{employee.age});
+    </insert>
+    <select id="selectByPage" resultType="tws.entity.Employee">
+    	select * from employee offset #{startIndex} rows fetch next #{pageSize} rows only;
+    </select>
+    <select id="selectParkingLotsById" resultType="tws.entity.ParkingLot">
+    	select * from parkingLot where employeeId = #{id};
+    </select>
+    <update id="updateEmployeeInfo">
+    	update employee set name = #{employee.name},age = #{employee.age} where id = #{employee.id};
+    </update>
+    <delete id="deleteEmployee">
+    	delete from employee where employee.id = #{id};
+    </delete>
+</mapper>

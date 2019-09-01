@@ -9,7 +9,7 @@ logging:
         web: DEBUG
 spring:
   datasource:
-    url: jdbc:h2:file:./h2-db/h2;MODE=Oracle
+    url:  jdbc:h2:mem:tws_persistence_db;MODE=Oracle
   h2:
     console:
       enabled: true
