@@ -1,4 +1,4 @@
-package tws.repository;
+package tws.repository.MapperTest;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +12,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import tws.entity.Employee;
 import tws.entity.ParkingLot;
+import tws.repository.EmployeeMapper;
 
 import javax.sql.DataSource;
 import java.util.List;

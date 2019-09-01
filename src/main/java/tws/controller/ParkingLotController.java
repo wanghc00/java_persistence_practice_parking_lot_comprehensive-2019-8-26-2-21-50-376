@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import tws.entity.ParkingLot;
@@ -24,8 +25,16 @@ public class ParkingLotController {
     ParkingLotMapper parkingLotMapper;
     
     @PostMapping
-    public void insertParkingLot(@RequestBody ParkingLot parkingLot) {
+    public ResponseEntity<ParkingLot> insertParkingLot(@RequestBody ParkingLot parkingLot) {
+        List<ParkingLot> parkingLots = parkingLotMapper.selectAllParkingLots();
+        for (ParkingLot p : parkingLots) {
+            if (p.getId().equals(parkingLot.getId())) {
+                return new ResponseEntity<ParkingLot>(HttpStatus.BAD_REQUEST);
+            }
+        }
         parkingLotMapper.insertParkingLot(parkingLot);
+        return new ResponseEntity<ParkingLot>(HttpStatus.CREATED);
+        
     }
     
     @GetMapping
